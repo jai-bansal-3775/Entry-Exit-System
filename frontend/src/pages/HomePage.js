@@ -67,7 +67,7 @@ const HomePage = () => {
           <Link to={"/addemployee"}>
             <div>
               <button className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
-                Add Employee
+                Create New Entry
               </button>
             </div>
           </Link>
