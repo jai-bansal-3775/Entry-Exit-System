@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Scanner from "../components/Scanner";
 import { Link } from "react-router-dom";
 
 // const people = [
