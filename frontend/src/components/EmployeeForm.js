@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import {toast} from 'react-toastify';
 
 
 const EmployeeForm = () => {
@@ -25,29 +25,32 @@ const EmployeeForm = () => {
         },
       }
     );
-
+    console.log("User Details found are : ",userDetails);
     const res = await userDetails.json();
-    console.log("Priting the single user details as res....",res);
-    console.log("Priting the single user details as....",res.data[0]);
-    console.log("Printing user Details without json formatiing....",userDetails);
-    const output2 = JSON.stringify(res);
-    console.log("Printing the stringify content : ",output2);
+    console.log("this is response : ",res);
+    if(res.data.length===0) {
+      toast.error("Either Roll No is Not Valid or Student is already Out of Institute");
+    }
 
-    const savedUserResponse = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/createUser`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(res),
-      }
-    );
-
-    const output = await savedUserResponse.json();
-    console.log("akshat");
-    console.log("FORM RESPONSE......", output);
-
+    else
+    {
+    
+      const savedUserResponse = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/createUser`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(res),
+        }
+      );
+  
+      const output = await savedUserResponse.json();
+      console.log("akshat");
+      console.log("FORM RESPONSE......", output);
+      toast.success('New Entry Created Successfully');
+    }
     navigate("/")
   };
 

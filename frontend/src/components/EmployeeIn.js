@@ -1,10 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const EmployeeInForm = () => {
   const { register, handleSubmit } = useForm();
+
   const navigate = useNavigate();
 
   const editStudent = async (data)=>{
@@ -23,6 +25,16 @@ const EmployeeInForm = () => {
         },
       }
     );
+
+    const res = await userDetails.json();
+
+    if(res.success===false) {
+        toast.error("Student does not have any out entry");
+      }
+    else
+    {
+        toast.success("In Entry Created Successfully");
+    }
 
     navigate("/");
   }
