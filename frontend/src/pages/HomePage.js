@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [empData, setEmpData] = useState();
+  const [dateValue,setDateValue] = useState('');
 
   const getAllData = async () => {
     try {
@@ -34,8 +35,28 @@ const HomePage = () => {
           },
         }
       );
-
+      console.log("Data Fetched Successfully");
       const res = await getPeople.json();
+      setEmpData(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dateHandler = async () => {
+    try {
+       const getPeople = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getByDate/${dateValue}`,
+          {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Data Fetched Successfully");
+      const res = await getPeople.json();
+      setDateValue('');
       setEmpData(res);
     } catch (error) {
       console.log(error);
@@ -46,6 +67,10 @@ const HomePage = () => {
     getAllData();
   },[]);
   console.log("Printing Employee Data",empData);
+
+  const dateChangeHandler = (event)=>{
+    setDateValue(event.target.value);
+  }
 
   // console.log(empData);
 
@@ -65,6 +90,11 @@ const HomePage = () => {
 
           <button onClick={getAllData} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
             Show all Data
+          </button>
+
+          <input type="date" id="dateValue" name="dateValue" value={dateValue} onChange={dateChangeHandler}/>
+          <button onClick={dateHandler} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
+            Search With Date
           </button>
 
           <Link to={"/addemployee"}>
