@@ -1,4 +1,4 @@
-const Register = require("../models/User");
+const Register = require("../models/Register");
 exports.getAllUser = async (req, res) => {
 
 	try {

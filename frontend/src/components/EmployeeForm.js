@@ -9,6 +9,29 @@ const EmployeeForm = () => {
 
   const createEmployee = async (data) => {
 
+    // console.log("printing Data in Employee Form : ",data);
+    const rollNo = data.rollNo;
+
+    // console.log("printing roll in Employee Form : ",rollNo);
+
+
+    const userDetails = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/getUser/${rollNo}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const res = await userDetails.json();
+    console.log("Priting the single user details as res....",res);
+    console.log("Priting the single user details as....",res.data[0]);
+    console.log("Printing user Details without json formatiing....",userDetails);
+    const output2 = JSON.stringify(res);
+    console.log("Printing the stringify content : ",output2);
+
     const savedUserResponse = await fetch(
       `${process.env.REACT_APP_BASE_URL}/createUser`,
       {
@@ -16,11 +39,12 @@ const EmployeeForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data }),
+        body: JSON.stringify(res),
       }
     );
 
-    console.log("FORM RESPONSE......", savedUserResponse);
+    const output = await savedUserResponse.json();
+    console.log("FORM RESPONSE......", output);
 
     navigate("/")
   };
@@ -41,6 +65,7 @@ const EmployeeForm = () => {
               <input
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent py-2 px-3 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 text-white dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
                 type="text"
+                // value={rollNo}
                 placeholder="Enter your roll no here"
                 maxLength={9}
                 minLength={9}

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
 	},
 
 	rollNo: {
-		type: Number,
+		type: String,
 		required: true,
 		unique:true,
 	},
@@ -87,6 +87,6 @@ const registerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Register", registerSchema);
-
+module.exports = mongoose.model("RegisterSchema", registerSchema);
 module.exports = mongoose.model("User", userSchema);
+

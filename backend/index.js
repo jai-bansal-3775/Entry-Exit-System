@@ -4,7 +4,6 @@ const dbConnect = require("./config/database");
 const userRoutes = require("./routes/user");
 const app = express();
 var cors = require("cors");
-const RdbConnect = require("./config/RegisterDatabase");
 const PORT = process.env.PORT || 4000;
 
 app.use(
@@ -23,7 +22,6 @@ app.listen(PORT, () => {
 });
 
 dbConnect();
-// RdbConnect();
 app.get("/", (req, res) => {
   res.send(`<h1>Backend is Running and this is '/' Route</h1>`);
 });

@@ -1,52 +1,51 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-// const registerSchema = new mongoose.Schema({
-// 	name: {
-// 		type: String,
-// 		required: true,
-// 	},
+const registerSchema = new mongoose.Schema({
+	name: {
+		type: String,
+		required: true,
+	},
 
-// 	email: {
-// 		type: String,
-// 		required: true,
-// 		unique: true,
-// 	},
+	email: {
+		type: String,
+		required: true,
+	},
 
-// 	rollNo: {
-// 		type: Number,
-// 		required: true,
-// 		unique:true,
-// 	},
+	rollNo: {
+		type: Number,
+		required: true,
+		unique:true,
+	},
 
-// 	department: {
-// 		type: String,
-// 		required: true,
-// 		maxLength: 20,
-// 	},
+	department: {
+		type: String,
+		required: true,
+		maxLength: 20,
+	},
 	
-// 	contact :
-// 	{
-// 		type:Number,
-// 		required:true,
-// 		maxLength:10,
-// 		minLength:10,
-// 	},
+	contact :
+	{
+		type:Number,
+		required:true,
+		maxLength:10,
+		minLength:10,
+	},
 
-// 	hostel: {
-// 		type: String,
-// 		required: true,
-// 	},
+	hostel: {
+		type: String,
+		required: true,
+	},
 
-//     outTime :
-//     {
-//         type:Date,
-//         Default:Date.now(),
-//     },
+    outTime :
+    {
+        type:Date,
+        Default:Date.now(),
+    },
 
-//     inTime :
-//     {
-//         type:Date,
-//     }
-// });
+    inTime :
+    {
+        type:Date,
+    }
+});
 
-// module.exports = mongoose.model("Register", registerSchema);
+module.exports = mongoose.model("Register", registerSchema);

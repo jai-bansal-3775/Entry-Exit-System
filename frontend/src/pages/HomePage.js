@@ -29,7 +29,7 @@ const HomePage = () => {
     try {
       const getPeople = await fetch(
         `${process.env.REACT_APP_BASE_URL}/getallUsers`,
-        {
+          {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -83,21 +83,50 @@ const HomePage = () => {
                         scope="col"
                         className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
-                        <span>Employee</span>
+                        <span>Student Name & Email</span>
                       </th>
                       <th
                         scope="col"
                         className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
-                        Title
+                        Roll No.
                       </th>
 
                       <th
                         scope="col"
                         className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
-                        Role
+                        Department
                       </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Hostel
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Contact No.
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Out Time
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                         In Time
+                      </th>
+
                     </tr>
                   </thead>
 
@@ -125,16 +154,30 @@ const HomePage = () => {
                         </td>
                         <td className="px-12 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900 dark:text-white">
-                            {person.title}
-                          </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-300">
-                            {person.department}
+                            {person.rollNo}
                           </div>
                         </td>
 
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                          {person.role}
+                          {person.department}
                         </td>
+
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                          {person.hostel}
+                        </td>
+
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                          {person.contact}
+                        </td>
+
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                          {person.outTime}
+                        </td>
+
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                          {person.inTime}
+                        </td>
+
                       </tr>
                     ))}
                   </tbody>
