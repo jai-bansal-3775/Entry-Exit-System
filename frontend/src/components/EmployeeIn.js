@@ -3,75 +3,77 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 
-const EmployeeForm = () => {
+const EmployeeInForm = () => {
   const { register, handleSubmit } = useForm();
 
   const navigate = useNavigate();
 
-  // const editStudent = async (data)=>{
-  //   console.log("printing Data in EditEmployee Form : ",data);
-  //   const rollNo = data.rollNo;
-
-  //   console.log("printing roll in Edit Employee Form : ",rollNo);
-
-
-  //   const userDetails = await fetch(
-  //     `${process.env.REACT_APP_BASE_URL}/updateEntry/${rollNo}`,
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // }
-
-  const createEmployee = async (data) => {
-
-    // console.log("printing Data in Employee Form : ",data);
+  const editStudent = async (data)=>{
+    console.log("printing Data in EditEmployee Form : ",data);
     const rollNo = data.rollNo;
 
-    // console.log("printing roll in Employee Form : ",rollNo);
+    console.log("printing roll in Edit Employee Form : ",rollNo);
 
 
     const userDetails = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/getUser/${rollNo}`,
+      `${process.env.REACT_APP_BASE_URL}/updateEntry/${rollNo}`,
       {
-        method: "GET",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
 
-    const res = await userDetails.json();
-    console.log("Priting the single user details as res....",res);
-    console.log("Priting the single user details as....",res.data[0]);
-    console.log("Printing user Details without json formatiing....",userDetails);
-    const output2 = JSON.stringify(res);
-    console.log("Printing the stringify content : ",output2);
+    navigate("/");
+  }
 
-    const savedUserResponse = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/createUser`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(res),
-      }
-    );
+//   const createEmployee = async (data) => {
 
-    const output = await savedUserResponse.json();
-    console.log("akshat");
-    console.log("FORM RESPONSE......", output);
+//     // console.log("printing Data in Employee Form : ",data);
+//     const rollNo = data.rollNo;
 
-    navigate("/")
-  };
+//     // console.log("printing roll in Employee Form : ",rollNo);
+
+
+//     const userDetails = await fetch(
+//       `${process.env.REACT_APP_BASE_URL}/getUser/${rollNo}`,
+//       {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+
+//     const res = await userDetails.json();
+//     console.log("Priting the single user details as res....",res);
+//     console.log("Priting the single user details as....",res.data[0]);
+//     console.log("Printing user Details without json formatiing....",userDetails);
+//     const output2 = JSON.stringify(res);
+//     console.log("Printing the stringify content : ",output2);
+
+//     const savedUserResponse = await fetch(
+//       `${process.env.REACT_APP_BASE_URL}/createUser`,
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(res),
+//       }
+//     );
+
+//     const output = await savedUserResponse.json();
+//     console.log("akshat");
+//     console.log("FORM RESPONSE......", output);
+
+//     navigate("/")
+//   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit(createEmployee)} className="mt-8">
+      <form onSubmit={handleSubmit(editStudent)} className="mt-8">
         <div className="space-y-5">
           <div>
             <label
@@ -99,7 +101,7 @@ const EmployeeForm = () => {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
             >
-              Create Out Entry
+              Create In Entry
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -123,4 +125,4 @@ const EmployeeForm = () => {
   );
 };
 
-export default EmployeeForm;
+export default EmployeeInForm;

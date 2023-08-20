@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import EmployeeForm from "../components/EmployeeForm";
+import EmployeeInForm from "../components/EmployeeIn";
 
 const CreateEmployeePage = () => {
   return (
@@ -42,6 +43,7 @@ const CreateEmployeePage = () => {
             </p>
 
             <EmployeeForm />
+            <EmployeeInForm/>
           </div>
         </div>
       </div>
