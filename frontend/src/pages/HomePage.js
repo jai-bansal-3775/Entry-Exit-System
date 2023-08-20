@@ -56,13 +56,13 @@ const HomePage = () => {
       <section className="container px-4 mx-auto py-4 bg-white">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-medium text-gray-800 dark:text-white">
-              Employees
+            <h2 className="text-lg center font-medium text-gray-800 dark:text-white">
+              Students IN-OUT Digital Register
             </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
+            {/* <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
               This is a list of all employees. You can add new employees, edit
               or delete existing ones.
-            </p>
+            </p> */}
           </div>
           <Link to={"/addemployee"}>
             <div>

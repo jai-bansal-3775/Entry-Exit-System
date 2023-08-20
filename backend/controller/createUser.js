@@ -18,6 +18,7 @@ exports.createUser = async (req, res) => {
         const currentTime = new Date();
         const formattedTime = currentTime.toISOString();
 
+        const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
         const user = await Register.create({
           name: req.body.data[0].name,
           email: req.body.data[0].email,
@@ -26,6 +27,7 @@ exports.createUser = async (req, res) => {
           rollNo: req.body.data[0].rollNo,
           contact: req.body.data[0].contact,
           outTime: formattedTime,
+          image: url,
         });
 
         return res.status(201).json({
