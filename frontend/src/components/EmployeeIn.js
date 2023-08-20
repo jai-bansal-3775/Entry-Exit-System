@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const EmployeeInForm = () => {
   const { register, handleSubmit } = useForm();
-
   const navigate = useNavigate();
 
   const editStudent = async (data)=>{
@@ -27,49 +26,6 @@ const EmployeeInForm = () => {
 
     navigate("/");
   }
-
-//   const createEmployee = async (data) => {
-
-//     // console.log("printing Data in Employee Form : ",data);
-//     const rollNo = data.rollNo;
-
-//     // console.log("printing roll in Employee Form : ",rollNo);
-
-
-//     const userDetails = await fetch(
-//       `${process.env.REACT_APP_BASE_URL}/getUser/${rollNo}`,
-//       {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     const res = await userDetails.json();
-//     console.log("Priting the single user details as res....",res);
-//     console.log("Priting the single user details as....",res.data[0]);
-//     console.log("Printing user Details without json formatiing....",userDetails);
-//     const output2 = JSON.stringify(res);
-//     console.log("Printing the stringify content : ",output2);
-
-//     const savedUserResponse = await fetch(
-//       `${process.env.REACT_APP_BASE_URL}/createUser`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(res),
-//       }
-//     );
-
-//     const output = await savedUserResponse.json();
-//     console.log("akshat");
-//     console.log("FORM RESPONSE......", output);
-
-//     navigate("/")
-//   };
 
   return (
     <div>

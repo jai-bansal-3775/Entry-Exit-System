@@ -7,25 +7,6 @@ const EmployeeForm = () => {
   const { register, handleSubmit } = useForm();
 
   const navigate = useNavigate();
-
-  // const editStudent = async (data)=>{
-  //   console.log("printing Data in EditEmployee Form : ",data);
-  //   const rollNo = data.rollNo;
-
-  //   console.log("printing roll in Edit Employee Form : ",rollNo);
-
-
-  //   const userDetails = await fetch(
-  //     `${process.env.REACT_APP_BASE_URL}/updateEntry/${rollNo}`,
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // }
-
   const createEmployee = async (data) => {
 
     // console.log("printing Data in Employee Form : ",data);

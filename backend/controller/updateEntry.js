@@ -9,19 +9,19 @@ exports.updateEntry = async (req, res) => {
 	try {
 		const userData = await Register.findOneAndUpdate({rollNo:roll},{inTime:formattedTime},
         {
-            useFindAndModify:false
-        },
-        (err)=>{
-            if(err){
-                console.log(err)
-            }
-            console.log("User Data Updated Successfully");
-        })
+            useFindAndModify:false,
+            new:true,
+        }
+        );
 
-		console.log("Printing the User Data : ",userData);
+        if(!userData){
+            return res.status(404).json({success:false,message:"User not found"});
+        }
+
+		console.log("User Data Updated Successfully");
 		res.json({ success: true, data: userData });
 	} catch (error) {
-		console.log("input data is wrong")
-		res.status(500).json({ success: false, error: error,message:"Process Failed"});
+		console.error("An error occured:",error);
+		res.status(500).json({ success: false, error:"Internal Server Error"});
 	}
 };
