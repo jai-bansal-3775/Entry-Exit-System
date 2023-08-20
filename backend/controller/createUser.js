@@ -1,10 +1,13 @@
-const Register  =require("../models/User");
+const Register  =require("../models/Register");
 
 exports.createUser = async (req, res) => {
   try {
     console.log("Reached in Create User.");
     console.log("req body", req.body);
     // const {name,email,department,hostel,contact,rollNo} = req.body.data[0];
+
+    const currentTime = new Date();
+    const formattedTime = currentTime.toISOString();
 
     const user = await Register.create({
       "name":req.body.data[0].name,
@@ -13,6 +16,7 @@ exports.createUser = async (req, res) => {
       "hostel":req.body.data[0].hostel,
       "rollNo":req.body.data[0].rollNo,
       "contact":req.body.data[0].contact,
+      "outTime": formattedTime
     });
 
     return res.status(200).json({

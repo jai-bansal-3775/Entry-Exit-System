@@ -44,6 +44,7 @@ const EmployeeForm = () => {
     );
 
     const output = await savedUserResponse.json();
+    console.log("akshat");
     console.log("FORM RESPONSE......", output);
 
     navigate("/")
@@ -79,27 +80,6 @@ const EmployeeForm = () => {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
             >
-              Create In Entry
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="ml-2 h-4 w-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                />
-              </svg>
-            </button>
-
-            <button
-              type="submit"
-              className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
-            >
               Create Out Entry
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +96,27 @@ const EmployeeForm = () => {
                 />
               </svg>
             </button>
+
+            {/* <button
+              onClick={}
+              className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+            >
+              Create In Entry
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="ml-2 h-4 w-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                />
+              </svg>
+            </button> */}
 
           </div>
         </div>
