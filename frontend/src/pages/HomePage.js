@@ -60,6 +60,7 @@ const HomePage = () => {
       setEmpData(res);
     } catch (error) {
       console.log(error);
+      setDateValue('');
     }
   };
 
