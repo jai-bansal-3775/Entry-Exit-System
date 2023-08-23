@@ -1,19 +1,19 @@
 const Register = require("../models/Register");
 
-exports.createUser = async (req, res) => {
+exports.createEntry = async (req, res) => {
   try {
     console.log("Reached in Create User.");
     console.log("req body", req.body);
 
     // Check if data with the given rollNo exists and get the most recent one
-    const existingUser = await Register.findOne({ rollNo: req.body.data[0].rollNo })
+    const existingStudent = await Register.findOne({ rollNo: req.body.data[0].rollNo })
       .sort({ indexDate: -1 }) // Sort by outTime in descending order
       .limit(1); // Limit to the first result (most recent)
 
-    console.log("Test:  ",existingUser);
+    // console.log("Test:  ",existingUser);
 
-    if (existingUser) {
-      if (existingUser.inTime) {
+    if (existingStudent) {
+      if (existingStudent.inTime) {
         // Data doesn't exist, create a new entry
         const currentTime = new Date();
 
@@ -26,7 +26,7 @@ exports.createUser = async (req, res) => {
         const seconds = currentTime.getSeconds();
 
         const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
-        const user = await Register.create({
+        const student = await Register.create({
           name: req.body.data[0].name,
           email: req.body.data[0].email,
           department: req.body.data[0].department,
@@ -42,12 +42,12 @@ exports.createUser = async (req, res) => {
         return res.status(201).json({
           status: 201,
           message: "User created successfully",
-          data: user,
+          data: student,
         });
       } else {
         return res.status(400).json({
           status: 400,
-          message: "User already Out",
+          message: "Student already Out",
         });
       }
     } else {
@@ -64,7 +64,7 @@ exports.createUser = async (req, res) => {
         const seconds = currentTime.getSeconds();
 
         const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
-        const user = await Register.create({
+        const student = await Register.create({
           name: req.body.data[0].name,
           email: req.body.data[0].email,
           department: req.body.data[0].department,
@@ -79,8 +79,8 @@ exports.createUser = async (req, res) => {
 
       return res.status(201).json({
         status: 201,
-        message: "User created successfully",
-        data: user,
+        message: "student created successfully",
+        data: student,
       });
     }
   } catch (error) {

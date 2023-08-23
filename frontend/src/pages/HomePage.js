@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import {toast} from 'react-toastify'; 
 
 const HomePage = () => {
-  const [empData, setEmpData] = useState();
+  const [studentData, setStudentData] = useState();
   const [dateValue, setDateValue] = useState('');
 
   const getAllData = async () => {
-    setEmpData([]);
+    setStudentData([]);
     try {
-      const getPeople = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/getallUsers`,
+      const getStudent = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getAllStudents`,
         {
           method: "GET",
           headers: {
@@ -19,18 +19,18 @@ const HomePage = () => {
         }
       );
 
-      const res = await getPeople.json();
-      setEmpData(res);
+      const res = await getStudent.json();
+      setStudentData(res);
     } catch (error) {
       console.log(error);
     }
   };
 
   const clickHandler = async () => {
-    setEmpData([]);
+    setStudentData([]);
     try {
-      const getPeople = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/getOutUser`,
+      const getStudent = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getOutStudents`,
         {
           method: "GET",
           headers: {
@@ -39,8 +39,8 @@ const HomePage = () => {
         }
       );
       console.log("Data Fetched Successfully");
-      const res = await getPeople.json();
-      setEmpData(res);
+      const res = await getStudent.json();
+      setStudentData(res);
     } catch (error) {
       console.log(error);
     }
@@ -54,10 +54,10 @@ const HomePage = () => {
     }
     else
     {
-    setEmpData([]);
+    setStudentData([]);
     try {
-      const getPeople = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/getByDate/${dateValue}`,
+      const getStudent = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getOutStudentsbyDate/${dateValue}`,
         {
           method: "GET",
           headers: {
@@ -66,9 +66,9 @@ const HomePage = () => {
         }
       );
       console.log("Data Fetched Successfully");
-      const res = await getPeople.json();
+      const res = await getStudent.json();
       setDateValue('');
-      setEmpData(res);
+      setStudentData(res);
     } catch (error) {
       console.log(error);
       setDateValue('');
@@ -79,7 +79,7 @@ const HomePage = () => {
   useEffect(() => {
     getAllData();
   }, []);
-  console.log("Printing Employee Data", empData);
+  console.log("Printing Employee Data", studentData);
 
   const dateChangeHandler = (event) => {
     setDateValue(event.target.value);
@@ -119,7 +119,7 @@ const HomePage = () => {
 
 
 
-          <Link to={"/addemployee"}>
+          <Link to={"/addStudent"}>
             <div>
               <button className="rounded-md bg-indigo-600 px-[0.8rem] py-3 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
                 Create New Entry <span className="text-xl">→</span>
@@ -186,7 +186,7 @@ const HomePage = () => {
                   </thead>
 
                   <tbody className="bg-white divide-y divide-gray-300 dark:divide-gray-700 dark:bg-gray-900">
-                    {empData?.data?.map((person) => (
+                    {studentData?.data?.map((person) => (
                       <tr key={person.name} className="bg-sky-100">
                         <td className="py-4 px-4 whitespace-nowrap">
                           <div className="flex items-center">

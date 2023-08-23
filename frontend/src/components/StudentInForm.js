@@ -1,90 +1,52 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
 
 
-const EmployeeForm = ({barcodeResult}) => {
+const StudentInForm = ({barcodeResult}) => {
   const { register, handleSubmit,setValue} = useForm();
   const navigate = useNavigate();
   React.useEffect(() => {
     if (barcodeResult) {
-      console.log("adfksjd",barcodeResult);
       setValue("rollNo", barcodeResult);
     }
   }, [barcodeResult, setValue]);
-  const createEmployee = async (data) => {
 
-    // console.log("printing Data in Employee Form : ",data);
+  const editStudent = async (data)=>{
+    console.log("printing Data in EditEmployee Form : ",data);
     const rollNo = data.rollNo;
 
-    // console.log("printing roll in Employee Form : ",rollNo);
+    console.log("printing roll in Edit Employee Form : ",rollNo);
 
 
-    const userDetails = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/getUser/${rollNo}`,
+    const studentDetails = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/updateEntry/${rollNo}`,
       {
-        method: "GET",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
 
-    console.log("User Details found are : ",userDetails);
-    const res = await userDetails.json();
-    console.log("this is response : ",res);
-    if(res.data.length===0) {
-      toast.error("Roll No is not valid !!!");
-    }
+    const res = await studentDetails.json();
 
+    if(res.success===false) {
+        toast.error("Student does not have any OUT entry");
+      }
     else
     {
-      
-      const userDetailsFromRegister = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/getUserFromRegister/${rollNo}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const output = await userDetailsFromRegister.json();
-
-      if(output.data.length===0)
-      {
-        const savedUserResponse = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/createUser`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(res),
-          }
-        );
-    
-        // const output = await savedUserResponse.json();
-        // console.log("akshat");
-        // console.log("FORM RESPONSE......", output);
-        toast.success('New Entry Created Successfully');
-        navigate("/")
-      }
-
-      else
-      {
-        toast.warn("Student is already out of Institute!!!")
-      }
-      
+        toast.success("In Entry Created Successfully");
+        navigate("/");
     }
 
-  };
+
+  }
 
   return (
     <div>
-      <form onSubmit={handleSubmit(createEmployee)} className="mt-8">
+      <form onSubmit={handleSubmit(editStudent)} className="mt-8">
         <div className="space-y-5">
           <div>
             <label
@@ -112,7 +74,7 @@ const EmployeeForm = ({barcodeResult}) => {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
             >
-              Create Out Entry
+              Create In Entry
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -136,4 +98,4 @@ const EmployeeForm = ({barcodeResult}) => {
   );
 };
 
-export default EmployeeForm;
+export default StudentInForm;

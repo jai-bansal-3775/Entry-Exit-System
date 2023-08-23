@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
-import EmployeeForm from "../components/EmployeeForm";
-import EmployeeInForm from "../components/EmployeeIn";
+import StudentForm from "../components/StudentOutForm";
+import StudentInForm from "../components/StudentInForm";
 import BarcodeScanner from "../components/BarCode";
+import StudentOutForm from "../components/StudentOutForm";
 
-const CreateEmployeePage = () => {
+const CreateEntryPage = () => {
   const [barcodeResult, setBarcodeResult] = useState("");
   const [isScannerOpen, setIsScannerOpen] = useState(false);
 
@@ -68,8 +69,8 @@ const CreateEmployeePage = () => {
               {/* ... */}
               {isScannerOpen && <BarcodeScanner onBarcodeDetected={handleBarcodeDetected} />}
               {/* ... */}
-              <EmployeeForm barcodeResult={barcodeResult} />
-              <EmployeeInForm barcodeResult={barcodeResult} />
+              <StudentOutForm barcodeResult={barcodeResult} />
+              <StudentInForm barcodeResult={barcodeResult} />
               {/* ... */}
             </section>
           </div>
@@ -79,4 +80,4 @@ const CreateEmployeePage = () => {
   );
 };
 
-export default CreateEmployeePage;
+export default CreateEntryPage;

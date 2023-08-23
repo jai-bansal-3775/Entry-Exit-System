@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import CreateEmployeePage from "./pages/CreateEmployeePage";
 import 'react-toastify/dist/ReactToastify.css';
+import CreateEntryPage from "./pages/CreateEntryPage";
 
 function App() {
   return (
     <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/addemployee" element={<CreateEmployeePage />} />
+          <Route path="/addStudent" element={<CreateEntryPage />} />
         </Routes>
     </div>
   );

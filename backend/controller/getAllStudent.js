@@ -1,10 +1,10 @@
 const Register = require("../models/Register");
-exports.getAllUser = async (req, res) => {
+exports.getAllStudents = async (req, res) => {
 
 	try {
-		const userData = await Register.find({}).sort({ indexDate: -1 });
+		const studentData = await Register.find({}).sort({ indexDate: -1 });
 		// console.log("Printing the User Data : ",userData);
-		res.json({ success: true, data: userData });
+		res.json({ success: true, data: studentData });
 	}
 	catch (error) {
 		console.log("input data is wrong")
