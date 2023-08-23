@@ -92,7 +92,7 @@ const HomePage = () => {
       <section className="container px-4 mx-auto py-4 bg-gray-800">
         <div className="LogoHeading flex items-center gap-5 border-2 p-2 mb-4 rounded-[10px] bg-gradient-to-r from-white to-blue-200">
           <img src="https://event.iitg.ac.in/icann2019/Proceedings_LaTeX/2019/IITG_logo.png" alt="IITGLOGO" height={80} width={80} ></img>
-          <h1 className="text-[1.5rem] font-bold text-gray-700">Indian Institute of Technology Guwahati</h1>
+          <h1 className="text-[1.6rem] font-bold text-gray-700">Indian Institute of Technology Guwahati</h1>
         </div>
         <div className="flex flex-wrap items-end gap-2 justify-center font-medium text-gray-800 dark:text-white p-4">
           <span className="text-blue-500 text-4xl">eRegister</span>
