@@ -4,7 +4,7 @@ const registerSchema = new mongoose.Schema({
 	image:
 	{
 		type:String,
-		required:true,
+		// required:true,
 	},
 
 	name: {
@@ -43,13 +43,17 @@ const registerSchema = new mongoose.Schema({
 
     outTime :
     {
-        type:Date,
-        Default:Date.now(),
+		type:String,
+        // type:Date,
+        // Default:Date.now(),
+		required:true
     },
 
     inTime :
     {
-        type:Date,
+		// type:Date(),
+        type:String,
+		// Default:"",
     }
 });
 

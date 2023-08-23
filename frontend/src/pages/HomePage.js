@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {toast} from 'react-toastify'; 
 
 const HomePage = () => {
   const [empData, setEmpData] = useState();
   const [dateValue, setDateValue] = useState('');
 
   const getAllData = async () => {
+    setEmpData([]);
     try {
       const getPeople = await fetch(
         `${process.env.REACT_APP_BASE_URL}/getallUsers`,
@@ -25,6 +27,7 @@ const HomePage = () => {
   };
 
   const clickHandler = async () => {
+    setEmpData([]);
     try {
       const getPeople = await fetch(
         `${process.env.REACT_APP_BASE_URL}/getOutUser`,
@@ -44,6 +47,14 @@ const HomePage = () => {
   };
 
   const dateHandler = async () => {
+
+    if(!dateValue)
+    {
+      toast.warn("Please select the date");
+    }
+    else
+    {
+    setEmpData([]);
     try {
       const getPeople = await fetch(
         `${process.env.REACT_APP_BASE_URL}/getByDate/${dateValue}`,
@@ -62,6 +73,7 @@ const HomePage = () => {
       console.log(error);
       setDateValue('');
     }
+  }
   };
 
   useEffect(() => {
@@ -171,7 +183,7 @@ const HomePage = () => {
                   </thead>
 
                   <tbody className="bg-white divide-y divide-gray-300 dark:divide-gray-700 dark:bg-gray-900">
-                    {empData?.data.map((person) => (
+                    {empData?.data?.map((person) => (
                       <tr key={person.name} className="bg-sky-100">
                         <td className="py-4 px-4 whitespace-nowrap">
                           <div className="flex items-center">

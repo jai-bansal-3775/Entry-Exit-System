@@ -25,33 +25,56 @@ const EmployeeForm = () => {
         },
       }
     );
+
     console.log("User Details found are : ",userDetails);
     const res = await userDetails.json();
     console.log("this is response : ",res);
     if(res.data.length===0) {
-      toast.error("Either Roll No is Not Valid or Student is already Out of Institute");
+      toast.error("Roll No is not valid !!!");
     }
 
     else
     {
-    
-      const savedUserResponse = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/createUser`,
+      
+      const userDetailsFromRegister = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getUserFromRegister/${rollNo}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(res),
         }
       );
-  
-      const output = await savedUserResponse.json();
-      console.log("akshat");
-      console.log("FORM RESPONSE......", output);
-      toast.success('New Entry Created Successfully');
+
+      const output = await userDetailsFromRegister.json();
+
+      if(output.data.length===0)
+      {
+        const savedUserResponse = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/createUser`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(res),
+          }
+        );
+    
+        // const output = await savedUserResponse.json();
+        // console.log("akshat");
+        // console.log("FORM RESPONSE......", output);
+        toast.success('New Entry Created Successfully');
+        navigate("/")
+      }
+
+      else
+      {
+        toast.warn("Student is already out of Institute!!!")
+      }
+      
     }
-    navigate("/")
+
   };
 
   return (

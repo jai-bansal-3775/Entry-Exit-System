@@ -29,14 +29,15 @@ const EmployeeInForm = () => {
     const res = await userDetails.json();
 
     if(res.success===false) {
-        toast.error("Student does not have any out entry");
+        toast.error("Student does not have any OUT entry");
       }
     else
     {
         toast.success("In Entry Created Successfully");
+        navigate("/");
     }
 
-    navigate("/");
+
   }
 
   return (

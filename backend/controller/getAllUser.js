@@ -5,7 +5,8 @@ exports.getAllUser = async (req, res) => {
 		const userData = await Register.find({}).sort({ outTime: -1 });
 		console.log("Printing the User Data : ",userData);
 		res.json({ success: true, data: userData });
-	} catch (error) {
+	}
+	catch (error) {
 		console.log("input data is wrong")
 		res.status(500).json({ success: false, error: error,message:"Process Failed"});
 	}

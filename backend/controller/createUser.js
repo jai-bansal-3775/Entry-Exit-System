@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
       if (existingUser.inTime) {
         // Data doesn't exist, create a new entry
         const currentTime = new Date();
-        const formattedTime = currentTime.toISOString();
+        // const formattedTime = currentTime.toISOString();
 
         const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
         const user = await Register.create({
@@ -26,7 +26,7 @@ exports.createUser = async (req, res) => {
           hostel: req.body.data[0].hostel,
           rollNo: req.body.data[0].rollNo,
           contact: req.body.data[0].contact,
-          outTime: formattedTime,
+          outTime: currentTime,
           image: url,
         });
 
@@ -44,7 +44,16 @@ exports.createUser = async (req, res) => {
     } else {
       // Data doesn't exist, create a new entry
       const currentTime = new Date();
-      const formattedTime = currentTime.toISOString();
+      // const formattedTime = currentTime.toISOString();
+      const year = currentTime.getFullYear();
+      
+      const month = currentTime.getMonth();
+      const day = currentTime.getDate();
+      console.log("Year in Create user is : ",year);
+      console.log("Month in Create user is : ",month);
+      console.log("day in Create user is : ",day);
+
+      // const date = `${year}-${month}-${day}`;
 
       const user = await Register.create({
         name: req.body.data[0].name,
@@ -53,7 +62,9 @@ exports.createUser = async (req, res) => {
         hostel: req.body.data[0].hostel,
         rollNo: req.body.data[0].rollNo,
         contact: req.body.data[0].contact,
-        outTime: formattedTime,
+        outTime:currentTime,
+        // outTime: formattedTime,
+        // outTime:date
       });
 
       return res.status(201).json({
