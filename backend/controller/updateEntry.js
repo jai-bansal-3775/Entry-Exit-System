@@ -6,17 +6,24 @@ exports.updateEntry = async (req, res) => {
     console.log("Printing Roll No in updateEntry:", roll);
 
     try {
-        const existingUser = await Register.findOne({ rollNo: roll,inTime:{$exists:false}});
+        const existingUser = await Register.findOne({ rollNo: roll,inTime:""});
         console.log("Existing User : ",existingUser);
         if(existingUser)
         {
             const out = existingUser.outTime;
             const currentTime = new Date();
+            const dateString = currentTime.toDateString();
+            console.log("Printing the string date is : ",dateString)
+                // const formattedTime = currentTime.toISOString();
+        
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+                const seconds = currentTime.getSeconds();
             // const formattedTime = currentTime.toISOString();
     
             const userData = await Register.findOneAndUpdate(
                 { rollNo: roll, outTime:out},
-                { inTime: currentTime },
+                { inTime: `${hours}:${minutes}:${seconds}`, inDate:dateString },
                 {
                     new: true, // Return the updated document
                 }

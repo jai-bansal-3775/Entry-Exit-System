@@ -2,7 +2,7 @@ const Register = require("../models/Register");
 exports.getOutUser = async (req, res) => {
 
 	try {
-		const userData = await Register.find({inTime:{$exists:false}}).sort({outTime:-1});
+		const userData = await Register.find({inTime:""}).sort({indexDate:-1});
 		console.log("Printing the User Out Data : ",userData);
 		res.json({ success: true, data: userData });
 	} catch (error) {

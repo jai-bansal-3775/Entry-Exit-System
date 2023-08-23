@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBackward } from "react-icons/fa";
 import EmployeeForm from "../components/EmployeeForm";
 import EmployeeInForm from "../components/EmployeeIn";
+import BarcodeScanner from "../components/BarCode";
 
 const CreateEmployeePage = () => {
+  const [barcodeResult, setBarcodeResult] = useState("");
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+
+  // ...
+
+  const handleOpenScanner = () => {
+    setIsScannerOpen(true);
+  };
+
+  // Function to handle barcode detection
+  const handleBarcodeDetected = (code) => {
+    console.log("code...",code);
+    setBarcodeResult(code);
+    setIsScannerOpen(false); // Close the scanner
+  };
   return (
     <section  className="bg-black">
       <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -19,20 +35,17 @@ const CreateEmployeePage = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           <div className="relative">
-            <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
-              <h3 className="text-4xl font-bold text-white">
-              IITG Security Check IN-OUT.
-              </h3>
+            <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24 mt-[390px]">
+              <div className="text-4xl font-bold text-white flex flex-col">
+                  <h3>Student Entry-Exit System</h3>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-white dark:text-white sm:text-4xl">
-              Create New Entry
-            </h2>
-            <p className="mt-2 text-base text-gray-600 dark:text-gray-300">
+            <p className="mt-2 mb-8 text-base text-gray-600 dark:text-gray-300">
               <Link
                 to={"/"}
                 className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700 flex items-center gap-3"
@@ -41,9 +54,24 @@ const CreateEmployeePage = () => {
                 Back to all Students' List
               </Link>
             </p>
-
-            <EmployeeForm />
-            <EmployeeInForm/>
+            <h2 className="text-3xl font-bold mb-10 leading-tight text-white dark:text-white sm:text-4xl">
+              Create New Entry
+            </h2>
+            <section className="bg-black">
+              {/* ... */}
+              <button
+                onClick={handleOpenScanner}
+                className="bg-blue-500 letter-spacing: 0.025em hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
+              >
+                Scan ID-Card
+              </button>
+              {/* ... */}
+              {isScannerOpen && <BarcodeScanner onBarcodeDetected={handleBarcodeDetected} />}
+              {/* ... */}
+              <EmployeeForm barcodeResult={barcodeResult} />
+              <EmployeeInForm barcodeResult={barcodeResult} />
+              {/* ... */}
+            </section>
           </div>
         </div>
       </div>

@@ -46,15 +46,33 @@ const registerSchema = new mongoose.Schema({
 		type:String,
         // type:Date,
         // Default:Date.now(),
-		required:true
+		// required:true
     },
+
+	outDate:
+	{
+		type:String,
+		// required:true,
+	},
 
     inTime :
     {
 		// type:Date(),
         type:String,
-		// Default:"",
-    }
+		default:"",
+    },
+
+	inDate:
+	{
+		type:String,
+		default:"",
+	},
+
+	indexDate:
+	{
+		type:Date,
+		required:true,
+	}
 });
 
 module.exports = mongoose.model("Register", registerSchema);

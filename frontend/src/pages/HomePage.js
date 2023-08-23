@@ -92,25 +92,28 @@ const HomePage = () => {
       <section className="container px-4 mx-auto py-4 bg-gray-800">
         <div className="LogoHeading flex items-center gap-5 border-2 p-2 mb-4 rounded-[10px] bg-gradient-to-r from-white to-blue-200">
           <img src="https://event.iitg.ac.in/icann2019/Proceedings_LaTeX/2019/IITG_logo.png" alt="IITGLOGO" height={80} width={80} ></img>
-          <h1 className="text-3xl font-bold text-gray-700">Indian Institute of Technology Guwahati</h1>
+          <h1 className="text-[1.5rem] font-bold text-gray-700">Indian Institute of Technology Guwahati</h1>
         </div>
-        <div className="flex items-center gap-2 justify-center font-medium text-gray-800 dark:text-white p-4 mb-5">
-          <span className="text-blue-500 text-4xl">eRegister</span><span className="text-xl m-2 text-cyan-200">Student Entry-Exit System</span>
+        <div className="flex flex-wrap items-end gap-2 justify-center font-medium text-gray-800 dark:text-white p-4">
+          <span className="text-blue-500 text-4xl">eRegister</span>
+          <span className="text-xl text-cyan-200">Student Entry-Exit System</span>
         </div>
+
         <div className="flex items-center justify-between">
-          <div className="flex gap-4">
-            <button onClick={clickHandler} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
-              Filter Button
+          <div className="flex flex-wrap gap-2">
+            <button onClick={clickHandler} className="rounded-md bg-indigo-600 px-[0.2rem] py-1.5 text-sm md:px-3.5 font-semibold leading-7 text-white hover:bg-indigo-500 ">
+              Exit Entries
             </button>
 
-            <button onClick={getAllData} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
-              Show all Data
+            <button onClick={getAllData} className="rounded-md bg-indigo-600 px-[0.2rem] py-1.5 md:px-3.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
+              Show all Entries
             </button>
-            <div className="flex gap-2 border-2 border-indigo-600 rounded-md bg-slate-400 p-1">
-            <input type="date" id="dateValue" name="dateValue" value={dateValue} onChange={dateChangeHandler} className="rounded-md border-1"/>
-            <button onClick={dateHandler} className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
-              Search With Date
+            <div className="flex flex-col gap-1">
+            <div><input type="date" id="dateValue" name="dateValue" value={dateValue} onChange={dateChangeHandler} className="rounded-md border-1"/></div>
+            <div><button onClick={dateHandler} className="w-full rounded-md bg-indigo-600 px-[0.2rem] py-1.5 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
+              Search By Date
             </button>
+            </div>
             </div>
           </div>
 
@@ -118,8 +121,8 @@ const HomePage = () => {
 
           <Link to={"/addemployee"}>
             <div>
-              <button className="rounded-md bg-indigo-600 px-3.5 py-3 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
-                Create New Entry
+              <button className="rounded-md bg-indigo-600 px-[0.8rem] py-3 text-sm font-semibold leading-7 text-white hover:bg-indigo-500 ">
+                Create New Entry <span className="text-xl">→</span>
               </button>
             </div>
           </Link>
@@ -146,7 +149,7 @@ const HomePage = () => {
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
+                        className="px-1 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
                       >
                         Department
                       </th>
@@ -167,16 +170,16 @@ const HomePage = () => {
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
+                        className="px-[50px] py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
                       >
-                        Out Time
+                        Exit Date & Time
                       </th>
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
+                        className="px-[50px] py-3.5 text-sm font-normal text-left rtl:text-right text-gray-200 dark:text-gray-400"
                       >
-                        In Time
+                        Entry Date & Time
                       </th>
 
                     </tr>
@@ -222,12 +225,26 @@ const HomePage = () => {
                           {person.contact}
                         </td>
 
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                          {person.outTime}
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                        <div className="ml-8">
+                              <div className="text-sm font-medium text-gray-500 dark:text-white">
+                                {person.outDate}
+                              </div>
+                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {person.outTime}
+                              </div>
+                            </div>
                         </td>
 
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
-                          {person.inTime}
+                        <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-400">
+                        <div className="ml-10">
+                              <div className="text-sm font-medium text-gray-500 dark:text-white">
+                                {person.inDate}
+                              </div>
+                              <div className="text-sm text-gray-600 dark:text-gray-400">
+                                {person.inTime}
+                              </div>
+                            </div>
                         </td>
 
                       </tr>

@@ -5,7 +5,7 @@ exports.getUserFromRegister = async (req, res) => {
 	console.log("Printing Roll No in getallUser  :",roll);
 
 	try {
-		const userData = await Register.find({rollNo:roll,inTime:{$exists:false}});
+		const userData = await Register.find({rollNo:roll,inDate:""});
 		console.log("Printing the User Data : ",userData);
 		res.json({ success: true, data: userData });
 	} catch (error) {

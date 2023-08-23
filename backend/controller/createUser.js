@@ -7,16 +7,23 @@ exports.createUser = async (req, res) => {
 
     // Check if data with the given rollNo exists and get the most recent one
     const existingUser = await Register.findOne({ rollNo: req.body.data[0].rollNo })
-      .sort({ outTime: -1 }) // Sort by outTime in descending order
+      .sort({ indexDate: -1 }) // Sort by outTime in descending order
       .limit(1); // Limit to the first result (most recent)
 
-    console.log(existingUser);
+    console.log("Test:  ",existingUser);
 
     if (existingUser) {
       if (existingUser.inTime) {
         // Data doesn't exist, create a new entry
         const currentTime = new Date();
+
+    const dateString = currentTime.toDateString();
+    console.log("Printing the string date is : ",dateString)
         // const formattedTime = currentTime.toISOString();
+
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
 
         const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
         const user = await Register.create({
@@ -26,8 +33,10 @@ exports.createUser = async (req, res) => {
           hostel: req.body.data[0].hostel,
           rollNo: req.body.data[0].rollNo,
           contact: req.body.data[0].contact,
-          outTime: currentTime,
+          outDate: dateString,
+          outTime:`${hours}:${minutes}:${seconds}`,
           image: url,
+          indexDate:currentTime,
         });
 
         return res.status(201).json({
@@ -44,28 +53,29 @@ exports.createUser = async (req, res) => {
     } else {
       // Data doesn't exist, create a new entry
       const currentTime = new Date();
-      // const formattedTime = currentTime.toISOString();
-      const year = currentTime.getFullYear();
-      
-      const month = currentTime.getMonth();
-      const day = currentTime.getDate();
-      console.log("Year in Create user is : ",year);
-      console.log("Month in Create user is : ",month);
-      console.log("day in Create user is : ",day);
+      console.log("Date for Comparision is : ",currentTime);
 
-      // const date = `${year}-${month}-${day}`;
+    const dateString = currentTime.toDateString();
+    console.log("Printing the string date is : ",dateString)
+        // const formattedTime = currentTime.toISOString();
 
-      const user = await Register.create({
-        name: req.body.data[0].name,
-        email: req.body.data[0].email,
-        department: req.body.data[0].department,
-        hostel: req.body.data[0].hostel,
-        rollNo: req.body.data[0].rollNo,
-        contact: req.body.data[0].contact,
-        outTime:currentTime,
-        // outTime: formattedTime,
-        // outTime:date
-      });
+        const hours = currentTime.getHours();
+        const minutes = currentTime.getMinutes();
+        const seconds = currentTime.getSeconds();
+
+        const url = `https://api.dicebear.com/5.x/initials/svg?seed=${req.body.data[0].name}`;
+        const user = await Register.create({
+          name: req.body.data[0].name,
+          email: req.body.data[0].email,
+          department: req.body.data[0].department,
+          hostel: req.body.data[0].hostel,
+          rollNo: req.body.data[0].rollNo,
+          contact: req.body.data[0].contact,
+          outDate: dateString,
+          outTime:`${hours}:${minutes}:${seconds}`,
+          image: url,
+          indexDate:currentTime,
+        });
 
       return res.status(201).json({
         status: 201,

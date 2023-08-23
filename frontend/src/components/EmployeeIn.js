@@ -4,10 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 
-const EmployeeInForm = () => {
-  const { register, handleSubmit } = useForm();
-
+const EmployeeInForm = ({barcodeResult}) => {
+  const { register, handleSubmit,setValue} = useForm();
   const navigate = useNavigate();
+  React.useEffect(() => {
+    if (barcodeResult) {
+      setValue("rollNo", barcodeResult);
+    }
+  }, [barcodeResult, setValue]);
 
   const editStudent = async (data)=>{
     console.log("printing Data in EditEmployee Form : ",data);
@@ -57,7 +61,7 @@ const EmployeeInForm = () => {
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent py-2 px-3 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 text-white dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
                 type="text"
                 // value={rollNo}
-                placeholder="Enter your roll no here"
+                placeholder="Enter Roll No"
                 maxLength={9}
                 minLength={9}
                 {...register("rollNo")}
