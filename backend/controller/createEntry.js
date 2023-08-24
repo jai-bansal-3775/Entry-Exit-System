@@ -1,11 +1,4 @@
 const Register = require("../models/Register");
-const tz = require('tz-offset');
-
-// Set your desired timezone (e.g., 'Asia/Kolkata' for IST)
-const timezone = 'Asia/Kolkata';
-
-// Set the timezone for your application
-tz.set(timezone);
 
 exports.createEntry = async (req, res) => {
   try {
