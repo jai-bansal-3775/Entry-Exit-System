@@ -4,13 +4,12 @@ import BarcodeScanner from "../components/Scanner";
 import { useSelector, useDispatch } from "react-redux";
 import { openScanner, closeScanner, setScannerResult } from "../slices/scannerSlice";
 import registerService from "../service/register.js";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const CreateEntryPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [rollNo, setRollNo] = useState("");
   const scannerResult = useSelector((state) => state.scanner.scannerResult)
   const isScannerOpen = useSelector((state) => state.scanner.isScannerOpen)
@@ -19,24 +18,26 @@ const CreateEntryPage = () => {
     const res = await registerService.createOutEntry(rollNo)
 
     if (res.status === 200) {
-      successToast(`Out entry created successfully || Roll No: ${rollNo}`)
+      successToast((await res.json()).message)
     } else {
-      warnToast(`Student already out of the campus || Roll No: ${rollNo}`)
+      warnToast((await res.json()).message)
     }
 
     setRollNo('')
+    dispatch(setScannerResult(""))
   }
 
   const handleCreateInEntry = async () => {
     const res = await registerService.createInEntry(rollNo)
 
     if (res.status === 200) {
-      successToast(`In entry created successfully || Roll No: ${rollNo}`)
+      successToast((await res.json()).message)
     } else {
-      warnToast(`Student don't have out entry || Roll No: ${rollNo}`)
+      warnToast((await res.json()).message)
     }
 
     setRollNo('')
+    dispatch(setScannerResult(""))
   }
 
   useEffect(()=>{
@@ -57,7 +58,7 @@ const CreateEntryPage = () => {
   }
 
   return (
-    <section className="bg-black">
+    <section className="bg-black w-full">
       <ToastContainer/>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="relative flex items-end py-4 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">

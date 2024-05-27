@@ -42,7 +42,7 @@ const BarcodeScanner = () => {
   }, []);
 
   return (
-    <div id="barcode-scanner" className="h-[200px] w-[270px]">
+    <div id="barcode-scanner" className="h-[200px] w-[270px] m-4 p-2 border-2 border-green-500">
       {/* The video stream and detected barcode will be displayed here */}
     </div>
   );

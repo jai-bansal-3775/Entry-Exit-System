@@ -10,7 +10,9 @@ const createOutEntry = asyncHandler(async (req, res) => {
 
     const userExist=await Student.findOne({rollNo})
     if(!userExist){
-        throw new ApiError(400, "No student found")
+        return res.status(300).json(
+            new ApiResponse(300,"",`No student found || Roll No: ${rollNo}`)
+        );
     }
 
     const existingOutEntry = await Register.findOne({
@@ -20,7 +22,9 @@ const createOutEntry = asyncHandler(async (req, res) => {
         ]
     });
     if(existingOutEntry){
-        throw new ApiError(400, "Student already out")
+        return res.status(300).json(
+            new ApiResponse(300,"",`Student already out of the campus || Roll No: ${rollNo}`)
+        );
     }
 
     const outEntry=await Register.create({ rollNo});
@@ -29,7 +33,7 @@ const createOutEntry = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json(
-        new ApiResponse(200,"","Out entry successfully created")
+        new ApiResponse(200,"",`Out entry successfully created || Roll No: ${rollNo}`)
     );
 })
 
@@ -39,7 +43,9 @@ const createInEntry = asyncHandler(async (req, res) => {
 
     const userExist=await Student.findOne({rollNo})
     if(!userExist){
-        throw new ApiError(400, "No student found")
+        return res.status(300).json(
+            new ApiResponse(300,"",`No student found || Roll No: ${rollNo}`)
+        );
     }
 
     const existingOutEntry = await Register.findOne({
@@ -49,8 +55,9 @@ const createInEntry = asyncHandler(async (req, res) => {
         ]
     });
     if(!existingOutEntry){
-        console.log(true)
-        throw new ApiError(400, "No out entry found for the student")
+        return res.status(300).json(
+            new ApiResponse(300,"",`No out entry found || Roll No: ${rollNo}`)
+        );
     }
 
     const inEntry = await Register.findOneAndUpdate({ rollNo, inDateAndTime: "" }, { inDateAndTime: Date.now() });
@@ -59,7 +66,7 @@ const createInEntry = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json(
-        new ApiResponse(200,"","In entry successfully created")
+        new ApiResponse(200,"",`In entry successfully created || Roll No: ${rollNo}`)
     );
 })
 
