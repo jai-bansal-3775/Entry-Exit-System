@@ -120,7 +120,7 @@ const getEntriesByDate = asyncHandler(async (req, res) => {
     const students = await Register.aggregate([
         {
             $match: {
-                inDateAndTime: {
+                outDateAndTime: {
                     $gte: startDate,
                     $lt: endDate
                 }

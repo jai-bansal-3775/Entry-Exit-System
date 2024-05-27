@@ -111,7 +111,7 @@ const CreateEntryPage = () => {
             <div>
               {!scannerResult
                 ? (isScannerOpen ? <BarcodeScanner /> :null)
-                : <div className="text-centre text-white p-5 m-4 bg-slate-300 rounded-lg">Barcode Scanned, Please create entry.</div>}
+                : <div className="text-centre text-green-900 p-5 m-4 bg-slate-300 rounded-lg">Barcode Scanned, Please create entry.</div>}
               {!isScannerOpen && !scannerResult
                 ? <div className="mt-2.5">
                   <input
