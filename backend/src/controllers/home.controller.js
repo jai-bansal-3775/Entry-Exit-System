@@ -95,6 +95,11 @@ const getOutStudents = asyncHandler(async (req, res) => {
             $project: {
                 student: 0
             }
+        },
+        {
+            $sort: {
+                outDateAndTime: -1
+            }
         }
     ])
 
@@ -153,6 +158,11 @@ const getEntriesByDate = asyncHandler(async (req, res) => {
         {
             $project: {
                 student: 0
+            }
+        },
+        {
+            $sort: {
+                outDateAndTime: -1
             }
         }
     ])
