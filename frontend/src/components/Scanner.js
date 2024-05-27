@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import Quagga from 'quagga';
+import {useDispatch} from 'react-redux';
+import { setScannerResult, closeScanner } from '../slices/scannerSlice';
 
-const BarcodeScanner = ({ onBarcodeDetected }) => {
+const BarcodeScanner = () => {
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     Quagga.init({
       inputStream: {
@@ -14,7 +19,7 @@ const BarcodeScanner = ({ onBarcodeDetected }) => {
         },
       },
       decoder: {
-        readers: [], // You can specify barcode types here
+        readers: [],
       },
     }, (err) => {
       if (err) {
@@ -26,15 +31,15 @@ const BarcodeScanner = ({ onBarcodeDetected }) => {
 
     Quagga.onDetected((data) => {
       console.log('Barcode detected:', data.codeResult.code);
-      // Call the provided callback function to handle the detected barcode
-      onBarcodeDetected(data.codeResult.code);
-      Quagga.stop(); // Stop the scanner immediately after detecting a barcode
+      dispatch(setScannerResult(data.codeResult.code));
+      dispatch(closeScanner());
+      Quagga.stop();
     });
 
     return () => {
       Quagga.stop();
     };
-  }, [onBarcodeDetected]);
+  }, []);
 
   return (
     <div id="barcode-scanner" className="h-[200px] w-[270px]">

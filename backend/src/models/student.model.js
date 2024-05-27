@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose,{Schema} from "mongoose";
 
-const studentSchema = new mongoose.Schema({
+const studentSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
@@ -13,15 +13,16 @@ const studentSchema = new mongoose.Schema({
 	},
 
 	rollNo: {
-		type: String,
+		type: Number,
 		required: true,
 		unique:true,
+		index:true
 	},
 
 	department: {
 		type: String,
 		required: true,
-		maxLength: 20,
+		maxLength: 50,
 	},
 	
 	contact :
@@ -36,7 +37,6 @@ const studentSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-});
+},{timestamps:true});
 
-module.exports = mongoose.model("Student", studentSchema);
-
+export const Student = mongoose.model("Student", studentSchema);

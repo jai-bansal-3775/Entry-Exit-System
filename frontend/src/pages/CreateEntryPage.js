@@ -1,31 +1,66 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { FaBackward } from "react-icons/fa";
-import StudentForm from "../components/StudentOutForm";
-import StudentInForm from "../components/StudentInForm";
-import BarcodeScanner from "../components/BarCode";
-import StudentOutForm from "../components/StudentOutForm";
+import BarcodeScanner from "../components/Scanner";
+import { useSelector, useDispatch } from "react-redux";
+import { openScanner, closeScanner, setScannerResult } from "../slices/scannerSlice";
+import registerService from "../service/register.js";
+import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateEntryPage = () => {
-  const [barcodeResult, setBarcodeResult] = useState("");
-  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [rollNo, setRollNo] = useState("");
+  const scannerResult = useSelector((state) => state.scanner.scannerResult)
+  const isScannerOpen = useSelector((state) => state.scanner.isScannerOpen)
 
-  // ...
+  const handleCreateOutEntry = async () => {
+    const res = await registerService.createOutEntry(rollNo)
 
-  const handleOpenScanner = () => {
-    setIsScannerOpen(true);
-  };
+    if (res.status === 200) {
+      successToast(`Out entry created successfully || Roll No: ${rollNo}`)
+    } else {
+      warnToast(`Student already out of the campus || Roll No: ${rollNo}`)
+    }
 
-  // Function to handle barcode detection
-  const handleBarcodeDetected = (code) => {
-    console.log("code...",code);
-    setBarcodeResult(code);
-    setIsScannerOpen(false); // Close the scanner
-  };
+    setRollNo('')
+  }
+
+  const handleCreateInEntry = async () => {
+    const res = await registerService.createInEntry(rollNo)
+
+    if (res.status === 200) {
+      successToast(`In entry created successfully || Roll No: ${rollNo}`)
+    } else {
+      warnToast(`Student don't have out entry || Roll No: ${rollNo}`)
+    }
+
+    setRollNo('')
+  }
+
+  useEffect(()=>{
+    if(scannerResult){
+      setRollNo(scannerResult)
+    }
+  },[scannerResult])
+
+  const successToast = (msg) => {
+    toast.success(msg, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+  const warnToast = (msg) => {
+    toast.warn(msg, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+
   return (
-    <section  className="bg-black">
+    <section className="bg-black">
+      <ToastContainer/>
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
+        <div className="relative flex items-end py-4 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
           <div className="absolute inset-0">
             <img
               className="h-full w-full object-cover object-top"
@@ -38,7 +73,7 @@ const CreateEntryPage = () => {
           <div className="relative">
             <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24 mt-[390px]">
               <div className="text-4xl font-bold text-white flex flex-col">
-                  <h3>Student Entry-Exit System</h3>
+                <h3>Student Entry-Exit System</h3>
               </div>
             </div>
           </div>
@@ -58,21 +93,50 @@ const CreateEntryPage = () => {
             <h2 className="text-3xl font-bold mb-10 leading-tight text-white dark:text-white sm:text-4xl">
               Create New Entry
             </h2>
-            <section className="bg-black">
-              {/* ... */}
+            <div className="flex flex-wrap justify-between">
               <button
-                onClick={handleOpenScanner}
+                onClick={() => { dispatch(openScanner()) }}
                 className="bg-blue-500 letter-spacing: 0.025em hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
               >
                 Scan ID-Card
               </button>
-              {/* ... */}
-              {isScannerOpen && <BarcodeScanner onBarcodeDetected={handleBarcodeDetected} />}
-              {/* ... */}
-              <StudentOutForm barcodeResult={barcodeResult} />
-              <StudentInForm barcodeResult={barcodeResult} />
-              {/* ... */}
-            </section>
+              <button
+                onClick={() => { dispatch(closeScanner()); dispatch(setScannerResult("")); setRollNo("") }}
+                className="bg-blue-500 letter-spacing: 0.025em hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
+              >
+                Input Roll No.
+              </button>
+            </div>
+            <div>
+              {!scannerResult
+                ? (isScannerOpen ? <BarcodeScanner /> :null)
+                : <div className="text-centre text-white p-5 m-4 bg-slate-300 rounded-lg">Barcode Scanned, Please create entry.</div>}
+              {!isScannerOpen && !scannerResult
+                ? <div className="mt-2.5">
+                  <input
+                    className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent py-2 px-3 text-sm placeholder:text-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 text-white dark:focus:ring-gray-400 dark:focus:ring-offset-gray-900"
+                    type="text"
+                    value={rollNo}
+                    onChange={(e) => setRollNo(e.target.value)}
+                    placeholder="Enter Roll No"
+                  ></input>
+                </div>
+                : null}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                className="bg-blue-500 letter-spacing: 0.025em hover:bg-blue-700 text-white font-bold py-3 px-6 rounded mt-2"
+                onClick={handleCreateOutEntry}
+              >
+                Create Out Entry
+              </button>
+              <button
+                className="bg-blue-500 letter-spacing: 0.025em hover:bg-blue-700 text-white font-bold py-3 px-6 rounded mt-2"
+                onClick={handleCreateInEntry}
+              >
+                Create In Entry
+              </button>
+            </div>
           </div>
         </div>
       </div>
