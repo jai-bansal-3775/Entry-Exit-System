@@ -39,6 +39,11 @@ const getStudents = asyncHandler(async (req, res) => {
             $project: {
                 student: 0
             }
+        },
+        {
+            $sort: {
+                outDateAndTime: -1
+            }
         }
     ])
     if (!students) {
