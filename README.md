@@ -6,7 +6,10 @@ A user-friendly website providing real-time monitoring of student’s entry and 
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Usage](#usage)
-  - [Tech stack](#tech-stack)
+  - [Technologies](#technologies)
+      - [Frontend-backend](#frontend-backend)
+      - [Miscelleneous](#miscelleneous)
+  - [Summary](#summary)
 
 ## Features
 Here is the overview of the features of the project. First we we have Entry creation page where student can create entry by Scanning barcode (ID card) or by roll number.
@@ -55,27 +58,26 @@ Home page have several options for filter the entries such as "Exit Entries" to 
 
 This application resolves the problem of manual data entries of students who are going outside or coming inside the campus. It also prevent false entries ensuring database integrity and minimizing discrepancies.
 
-## Tech stack
+## Technologies
 
-<div style="display: flex; flex-wrap: wrap; margin: 5px; gap:20px; justify-content:center; align-item:center"><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/express.svg"/><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/mongodb.svg"/><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/nodejs.svg"/><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react-router.svg"/><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react.svg"/><img width="60" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/redux.svg"/><img width="80" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/tailwindcss.svg"/></div>
+#### Frontend-backend
+
+| Frontend              |   Backend     |  Database  |
+|-----------------------|---------------|------------|
+|  HTML                 |   ExpressJS   |  MongoDB   |
+|  CSS                  |   NodeJS      |
+|  JavaScript           |   
+|  React.js             |
+|  Tailwind CSS         |
+
+#### Miscelleneous
+
+* Implimented MongoDB Aggregation pipelines for seamless data retrieval
+* React-redux and Redux-toolkit for state management.
+* Good practices are followed while writting the code of the project.
+
+## Summary
+
+The IITG-Entry-Exit-System is a user-friendly website designed to monitor real-time entry and exit of students across various gates within the IITG campus. Features include entry creation via barcode scanning or roll number input, with an intuitive interface for filtering entries and managing data. The system streamlines the process, minimizes manual data entry errors, and ensures database integrity. Built using a tech stack comprising React.js for frontend, Express.js and Node.js for backend, and MongoDB for the database, the project adheres to good coding practices for reliability and maintainability.
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
