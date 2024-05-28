@@ -2,7 +2,6 @@
 A user-friendly website providing real-time monitoring of student’s entry and exit across various gates in IITG campus.
 
 ## Table of Contents
-
 - [IITG-Entry-Exit-System](#iitg-entry-exit-system)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
@@ -12,43 +11,45 @@ A user-friendly website providing real-time monitoring of student’s entry and 
 ## Features
 Here is the overview of the features of the project. First we we have Entry creation page where student can create entry by Scanning barcode (ID card) or by roll number.
 
-![Alt Text - description of the image](./Screenshots/create-entry-page.png)
+<img src="./Screenshots/create-entry-page.png" alt="Alt Text - description of the image" width="80%" />
 
 ---
 
 To create the entry by scanning ID card click on the button "Scan ID-Card"
 It will ask for camera permission, after giving the permission, scan your ID card. It will directly fetch the details from the ID card.
 
-![Alt Text - description of the image](./Screenshots/barcode-scanner.png)
+<img src="/Screenshots/barcode-scanner.png" alt="Alt Text - description of the image" width="70%"/>
 
 ---
 
 After scanning the ID card. It will notify that "Barcode Scanned, Please create entry", Now click on respective button to create entry.
 
-![Alt Text - description of the image](./Screenshots/create-entry-barcode.png)
+<img src="./Screenshots/create-entry-barcode.png" alt="Alt Text - description of the image" width="70%"/>
 
 ---
 
 After entry creation a toast will appear on the top of the screen.
 
-![Alt Text - description of the image](./Screenshots/entry-created.png)
+<img src="./Screenshots/entry-created.png" alt="Alt Text - description of the image" width="70%"/>
 
 ---
 
 One can make an entry using roll number also.
-![Alt Text - description of the image](./Screenshots/roll-number.png)
+
+<img src="./Screenshots/roll-number.png" alt="Alt Text - description of the image" width="70%"/>
 
 ---
 
 Here is the Home page of the application where all the entries will appears.
 
-![Alt Text - description of the image](./Screenshots/home-page.png)
+<img src="./Screenshots/home-page.png" alt="Alt Text - description of the image" width="80%">
+
 
 ---
 
 Home page have several options for filter the entries such as "Exit Entries" to get the list of all the student who are currently out of the campus, "Filter by Date" to get the entries for a particular date.
 
-![Alt Text - description of the image](./Screenshots/date-filter.png)
+<img src="./Screenshots/date-filter.png" alt="Alt Text - description of the image" width="80%" />
 
 ## Usage
 
