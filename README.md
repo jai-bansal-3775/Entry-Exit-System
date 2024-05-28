@@ -2,6 +2,7 @@
 A user-friendly website providing real-time monitoring of student’s entry and exit across various gates in IITG campus.
 
 ## Table of Contents
+
 - [IITG-Entry-Exit-System](#iitg-entry-exit-system)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
